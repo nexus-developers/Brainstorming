@@ -38,10 +38,16 @@ export default function Routes(){
                 name='Register' 
                 component={RegisterRoutes} 
                 options={{
-                headerShown: false,
-            }}
+                    headerShown: false,
+                }}
             />
-            {/* <Stack.Screen name='Main' component={Main} /> */}
+            <Stack.Screen 
+                name='Main' 
+                component={Main} 
+                options={{
+                    headerShown: false,
+                }}
+            />
             {/* <Stack.Screen name='Profile' component={Profile} /> */}
             {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
             </Stack.Navigator>

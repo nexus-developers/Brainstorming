@@ -37,15 +37,14 @@ export const ContentCont = styled.View`
 `;
 
 export const TitleCont = styled.View`
-  width: 100%;
+  width: 80%;
   height: 25%;
+  align-self: center;
 `;
 
 export const TitleText = styled.Text`
-  width: 80%;
   color: #3B2C33;
   font-size: 22px;
-  align-self: center;
   text-align: center;
   font-family: 'Bold';
   margin-top: 5px;
