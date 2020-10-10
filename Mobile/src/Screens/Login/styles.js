@@ -14,7 +14,8 @@ export const ScreenTitleCont = styled.View`
   width: 100%;
   align-items: center;
   flex-direction: row;
-  /* margin-bottom: 30px; */
+  margin-bottom: 25px;
+  /* background-color: red; */
 `;
 
 export const ScreenTitle = styled.Text`
@@ -41,7 +42,7 @@ export const TitleText = styled.Text`
   color: #3B2C33;
   font-size: 25px;
   font-family: 'Bold';
-  margin-top: 20px;
+  /* margin-top: 20px; */
   align-self: center;
 `;
 

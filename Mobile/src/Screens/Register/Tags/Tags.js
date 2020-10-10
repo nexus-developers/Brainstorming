@@ -69,7 +69,7 @@ const Tags = () => {
             <ButtonRegister
               onPress={() => navigation.navigate('AreasRegister')}
             >
-              <ButtonText>Ir para a próxima etapa</ButtonText>
+              <ButtonText>Próxima etapa</ButtonText>
             </ButtonRegister>
         </InternContainer>
       </ScrollView>

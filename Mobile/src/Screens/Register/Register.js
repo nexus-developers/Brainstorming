@@ -29,7 +29,7 @@ const Register = () => {
             source={Illustration1}
           />
         </ImagesView>
-          <Title>E ai, vamos tirar sua idéia do papel ou ajudar outras pessoas a tirar as delas?</Title>
+          <Title>E aí, Vamos tirar a sua idéia e a de outras pessoas do papel?</Title>
           <Comment>Vamos tentar achar um projeto ou pessoas bacanas para te ajudar!</Comment>
         </InternContainer>
         <ViewButton>
@@ -41,7 +41,7 @@ const Register = () => {
           <BackButton
             onPress={() => navigation.goBack()}
           >
-            <Comment1>Voltar ao Início</Comment1>
+            <Comment1>Voltar</Comment1>
           </BackButton>
         </ViewButton>
     </Container>

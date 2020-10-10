@@ -17,6 +17,7 @@ export const ScreenTitle = styled.Text`
   font-size: 18px;
   font-family: 'Bold';
   margin-left: 5px;
+  margin-top: 5px;
 `;
 
 export const ImageCont = styled.View`
@@ -37,7 +38,7 @@ export const ContentCont = styled.View`
 `;
 
 export const TitleCont = styled.View`
-  width: 80%;
+  width: 90%;
   height: 25%;
   align-self: center;
 `;
