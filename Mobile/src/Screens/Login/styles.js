@@ -1,13 +1,12 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.View`
   flex: 1;
   background-color: #FFF;
 `;
 
-export const Content = styled.KeyboardAvoidingView`
+export const Content = styled.View`
   flex: 1;
-  
 `;
 
 export const ScreenTitleCont = styled.View`
