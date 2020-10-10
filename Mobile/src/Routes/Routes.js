@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 // Routes
 import Wellcome from '../Screens/Wellcome/Wellcome'
@@ -15,19 +15,49 @@ const Stack = createStackNavigator()
 export default function Routes(){
     return(
         <NavigationContainer>
-            <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+            }}
+          >
+            <Stack.Screen 
+              name='Wellcome' 
+              component={Wellcome} 
+              options={{ 
+                headerShown: false 
+              }}
+              />
                 <Stack.Screen 
-                    name='Wellcome' 
-                    component={Wellcome} 
-                    options={{ 
-                        headerShown: false 
-                    }}
+                  name='Login' 
+                  component={Login} 
+                  options={{
+                    headerTitle: false,
+                    // title: 'Login',
+                    headerTitleStyle: { 
+                      fontFamily: 'Bold',
+                    },
+                    headerTintColor: '#3B2C33',
+                    headerTitleAlign: 'center'
+                  }}
                 />
-                <Stack.Screen name='Login' component={Login} />
-                <Stack.Screen name='Register' component={RegisterRoutes} />
-                {/* <Stack.Screen name='Main' component={Main} /> */}
-                {/* <Stack.Screen name='Profile' component={Profile} /> */}
-                {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
+                <Stack.Screen 
+                  name='Register' 
+                  component={RegisterRoutes} 
+                  options={{
+                  headerShown: false,
+                }}
+            />
+            <Stack.Screen name='Login' component={Login} />
+            <Stack.Screen 
+                name='Register' 
+                component={RegisterRoutes} 
+                options={{
+                headerShown: false,
+            }}
+            />
+            {/* <Stack.Screen name='Main' component={Main} /> */}
+            {/* <Stack.Screen name='Profile' component={Profile} /> */}
+            {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
             </Stack.Navigator>
         </NavigationContainer>
     )
