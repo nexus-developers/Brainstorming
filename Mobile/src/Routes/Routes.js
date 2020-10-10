@@ -14,12 +14,18 @@ const Stack = createStackNavigator()
 export default function Routes(){
     return(
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name='Login' component={Login} />
-                <Stack.Screen name='Register' component={RegisterRoutes} />
-                {/* <Stack.Screen name='Main' component={Main} /> */}
-                {/* <Stack.Screen name='Profile' component={Profile} /> */}
-                {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
+          <Stack.Navigator>
+            <Stack.Screen name='Login' component={Login} />
+            <Stack.Screen 
+              name='Register' 
+              component={RegisterRoutes} 
+              options={{
+                  headerShown: false,
+                }}
+            />
+            {/* <Stack.Screen name='Main' component={Main} /> */}
+            {/* <Stack.Screen name='Profile' component={Profile} /> */}
+            {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
             </Stack.Navigator>
         </NavigationContainer>
     )
