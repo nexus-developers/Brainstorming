@@ -9,7 +9,7 @@ export default function Wellcome({ navigation }) {
     <Container>
       <StatusBar backgroundColor="white" barStyle="dark-content"/>
       <ScreenTitleCont>
-        <Fontisto style={{ marginLeft: 15 }} name="atom" size={24} color="black" />
+        <Fontisto style={{ marginLeft: 15, marginTop: 5 }} name="atom" size={24} color="black" />
         <ScreenTitle>Brainstorming</ScreenTitle>
       </ScreenTitleCont>
       <ImageCont >
@@ -17,7 +17,7 @@ export default function Wellcome({ navigation }) {
       </ImageCont>
       <ContentCont>
         <TitleCont>
-          <TitleText>Boas vindas ao Brainstorm, <SubtitleText>aqui você tirará o seu projeto do papel!</SubtitleText></TitleText>
+          <TitleText>Boas vindas ao Brainstorming, <SubtitleText>aqui você tirará o seu projeto do papel!</SubtitleText></TitleText>
         </TitleCont>
         <BtnsCont>
           <LoginButton onPress={() => {navigation.navigate('Login')}}>

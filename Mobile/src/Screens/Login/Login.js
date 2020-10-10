@@ -33,12 +33,12 @@ export default function Login({ navigation }) {
             <LastCont>
               <RegisterText>Ainda não tem uma conta?</RegisterText>
               <RegisterBtn onPress={() => {navigation.navigate('Register')}}>
-                <RegisterTextBtn>Registrar</RegisterTextBtn>
+                <RegisterTextBtn>Registre-se</RegisterTextBtn>
               </RegisterBtn>
             </LastCont>
             <LastCont>
               <WellcomeBtn onPress={() => {navigation.navigate('Wellcome')}}>
-                <WellcomeTextBtn>Voltar ao início</WellcomeTextBtn>
+                <WellcomeTextBtn>Voltar</WellcomeTextBtn>
               </WellcomeBtn>
             </LastCont>
           </ContentCont>

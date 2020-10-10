@@ -75,10 +75,10 @@ const Areas = () => {
       <ScrollView>
         <InternContainer>
           <Title>
-            Conta para a gente, em qual área você atua ou tem interesse em atuar? 
+            Em qual área você atua ou tem interesse em atuar? 
           </Title>
           <Comment>
-            É importante sabermos onde você atua ou pode atuar, pois assim traremos os projetos e pessoas que podem te ajudar ou serem ajudadas. 
+            É importante sabermos a sua área de atuação, pois assim torna-se mais fácil de conectar você ao seu possível companheiro de equipe.
           </Comment>
           <FlatList 
             data={data}
@@ -105,7 +105,7 @@ const Areas = () => {
           <ButtonRegister
               onPress={() => navigation.navigate('TagsRegister')}
             >
-              <ButtonText>Ir para a próxima etapa</ButtonText>
+              <ButtonText>Próxima etapa</ButtonText>
           </ButtonRegister>
         </InternContainer>
       </ScrollView>

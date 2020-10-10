@@ -32,7 +32,8 @@ export default function Routes(){
               fontFamily: 'Bold',
             },
             headerTintColor: '#3B2C33',
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
           }}
         />
 
@@ -40,12 +41,13 @@ export default function Routes(){
           name='AreasRegister'
           component={AreasRegister}
           options={{
-            title: 'Sua Área de Atuação',
+            title: 'Área de Atuação',
             headerTitleStyle: { 
               fontFamily: 'Bold',
             },
             headerTintColor: '#3B2C33',
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
           }}
         />
 
@@ -58,7 +60,8 @@ export default function Routes(){
               fontFamily: 'Bold',
             },
             headerTintColor: '#3B2C33',
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
+            headerBackTitleVisible: false,
           }}
         />
     </Stack.Navigator>

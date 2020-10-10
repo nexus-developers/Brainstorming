@@ -19,7 +19,7 @@ const FormRegister = () => {
       <Container>
         <ScrollView>
           <InternContainer>
-            <Title>Olá, para a gente te conhecer melhor, preencha essas informações antes de partimos para a próxima etapa!</Title>
+            <Title>Para a gente te conhecer melhor, preencha essas informações antes de prosseguir!</Title>
             <FormView>
               <FormTitle>Como você prefere ser chamado?*</FormTitle>
               <Input 
@@ -51,7 +51,7 @@ const FormRegister = () => {
             <ButtonRegister
               onPress={() => navigation.navigate('AreasRegister')}
             >
-              <ButtonText>Ir para a próxima etapa</ButtonText>
+              <ButtonText>Próxima etapa</ButtonText>
             </ButtonRegister>
           </InternContainer>
         </ScrollView>

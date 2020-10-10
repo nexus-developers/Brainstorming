@@ -25,7 +25,7 @@ export const Image = styled.Image`
 export const Title = styled.Text`
   text-align: center;
   font-family: 'Bold';
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 20px;
   color: #3B2C33;
 `
@@ -34,7 +34,7 @@ export const Comment = styled.Text`
   text-align: center;
   font-family: 'Light';
   margin-top: 40px;
-  font-size: 12px;
+  font-size: 14px;
   width: 60%;
   color: #3B2C33;
 `
