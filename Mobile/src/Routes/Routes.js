@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Routes
+import Wellcome from '../Screens/Wellcome/Wellcome'
 import Login from '../Screens/Login/Login'
 import RegisterRoutes from './Register.routes'
 import Main from '../Screens/Main/Main'
@@ -14,18 +15,25 @@ const Stack = createStackNavigator()
 export default function Routes(){
     return(
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen name='Login' component={Login} />
-            <Stack.Screen 
-              name='Register' 
-              component={RegisterRoutes} 
-              options={{
+            <Stack.Navigator>
+                <Stack.Screen 
+                    name='Wellcome' 
+                    component={Wellcome} 
+                    options={{ 
+                        headerShown: false 
+                    }}
+                />
+                <Stack.Screen name='Login' component={Login} />
+                <Stack.Screen 
+                  name='Register' 
+                  component={RegisterRoutes} 
+                  options={{
                   headerShown: false,
                 }}
-            />
-            {/* <Stack.Screen name='Main' component={Main} /> */}
-            {/* <Stack.Screen name='Profile' component={Profile} /> */}
-            {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
+                />
+                {/* <Stack.Screen name='Main' component={Main} /> */}
+                {/* <Stack.Screen name='Profile' component={Profile} /> */}
+                {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
             </Stack.Navigator>
         </NavigationContainer>
     )
