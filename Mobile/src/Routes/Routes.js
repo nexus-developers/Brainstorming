@@ -15,21 +15,15 @@ const Stack = createStackNavigator()
 export default function Routes(){
     return(
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen 
+          <Stack.Navigator>
+            <Stack.Screen 
                     name='Wellcome' 
                     component={Wellcome} 
                     options={{ 
                         headerShown: false 
                     }}
-                />
-                <Stack.Screen 
-                    name='Login' 
-                    component={Login}
-                    options={{ 
-                        // headerShown: false 
-                    }} 
-                />
+              />
+                <Stack.Screen name='Login' component={Login} />
                 <Stack.Screen 
                   name='Register' 
                   component={RegisterRoutes} 
