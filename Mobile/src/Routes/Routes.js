@@ -27,27 +27,13 @@ export default function Routes(){
                 headerShown: false 
               }}
               />
-                <Stack.Screen 
-                  name='Login' 
-                  component={Login} 
-                  options={{
-                    headerTitle: false,
-                    // title: 'Login',
-                    headerTitleStyle: { 
-                      fontFamily: 'Bold',
-                    },
-                    headerTintColor: '#3B2C33',
-                    headerTitleAlign: 'center'
-                  }}
-                />
-                <Stack.Screen 
-                  name='Register' 
-                  component={RegisterRoutes} 
-                  options={{
-                  headerShown: false,
+            <Stack.Screen 
+                name='Login' 
+                component={Login} 
+                options={{
+                    headerShown: false 
                 }}
             />
-            <Stack.Screen name='Login' component={Login} />
             <Stack.Screen 
                 name='Register' 
                 component={RegisterRoutes} 

@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 
-import { Container, Content, ScreenTitleCont, ScreenTitle, ContentCont, TitleCont, TitleText, SubtitleText, InputsCont, LoginBtnCont, InputText, Input, Input1, Input2, LoginButton, BtnText, LastCont, RegisterText, RegisterBtn, RegisterTextBtn } from './styles';
+import { Container, Content, ScreenTitleCont, ScreenTitle, ContentCont, TitleCont, TitleText, SubtitleText, InputsCont, LoginBtnCont, InputText, Input, Input1, Input2, LoginButton, BtnText, LastCont, RegisterText, RegisterBtn, RegisterTextBtn, WellcomeBtn, WellcomeTextBtn } from './styles';
 
 export default function Login({ navigation }) {
   return (
-      <Container>
-          <Content>
+      <Container >
+          <Content behavior={(Platform.OS === 'ios') ? "position" : "padding"}>
             <ScreenTitleCont>
               <Fontisto style={{ marginLeft: 15 }} name="atom" size={24} color="black" />
               <ScreenTitle>Brainstorming</ScreenTitle>
@@ -27,17 +27,20 @@ export default function Login({ navigation }) {
                   secureTextEntry={true}
                 />
               </Input2>
-              <LoginBtnCont>
-                <LoginButton>
-                  <BtnText>Entrar</BtnText>
-                </LoginButton>
-                <LastCont>
-                  <RegisterText>Ainda não tem uma conta?</RegisterText>
-                  <RegisterBtn onPress={() => {navigation.navigate('Register')}}>
-                    <RegisterTextBtn>Registrar</RegisterTextBtn>
-                  </RegisterBtn>
-                </LastCont>
-              </LoginBtnCont>
+              <LoginButton>
+                <BtnText>Entrar</BtnText>
+              </LoginButton>
+              <LastCont>
+                <RegisterText>Ainda não tem uma conta?</RegisterText>
+                <RegisterBtn onPress={() => {navigation.navigate('Register')}}>
+                  <RegisterTextBtn>Registrar</RegisterTextBtn>
+                </RegisterBtn>
+              </LastCont>
+              <LastCont>
+                <WellcomeBtn onPress={() => {navigation.navigate('Wellcome')}}>
+                  <WellcomeTextBtn>Voltar ao início</WellcomeTextBtn>
+                </WellcomeBtn>
+              </LastCont>
             </ContentCont>
           </Content>
       </Container>
