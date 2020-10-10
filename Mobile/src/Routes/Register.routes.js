@@ -4,6 +4,7 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 import Register from '../Screens/Register/Register'
 import FormRegister from '../Screens/Register/FormRegister/FormRegister'
 import AreasRegister from '../Screens/Register/Areas/Areas'
+import TagsRegister from '../Screens/Register/Tags/Tags'
 
 const Stack = createStackNavigator()
 
@@ -40,6 +41,19 @@ export default function Routes(){
           component={AreasRegister}
           options={{
             title: 'Sua Área de Atuação',
+            headerTitleStyle: { 
+              fontFamily: 'Bold',
+            },
+            headerTintColor: '#3B2C33',
+            headerTitleAlign: 'center'
+          }}
+        />
+
+        <Stack.Screen 
+          name='TagsRegister'
+          component={TagsRegister}
+          options={{
+            title: 'Seleção de Tags',
             headerTitleStyle: { 
               fontFamily: 'Bold',
             },
