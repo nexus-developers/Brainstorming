@@ -6,7 +6,7 @@ import { View, Text } from 'react-native';
 export default function Login() {
   return (
       <View>
-          <Text>Login</Text>
+          <Text style={{ fontFamily: 'Bold' }}>Login</Text>
       </View>
   )
 }
