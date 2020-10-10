@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, ScrollView } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { 
   Container,
   InternContainer,
@@ -7,7 +8,11 @@ import {
   Comment,
   Card,
   ImageCard,
-  Title2
+  Title2,
+  FormTitle,
+  Input,
+  ButtonRegister,
+  ButtonText
 } from './styles';
 
 import character from '../Assets/character2.png'
@@ -64,8 +69,10 @@ const data = [
 ]
 
 const Areas = () => {
+  const navigation = useNavigation()
   return (
     <Container>
+      <ScrollView>
         <InternContainer>
           <Title>
             Conta para a gente, em qual área você atua ou tem interesse em atuar? 
@@ -86,7 +93,22 @@ const Areas = () => {
             )}
             keyExtractor={item => item.id}
           />
+          <FormTitle>Quanto tempo de experiência?*</FormTitle>
+          <Input 
+            maxLength={25}
+          />
+
+          <FormTitle>Suas Habilidades?*</FormTitle>
+          <Input 
+            maxLength={25}
+          />
+          <ButtonRegister
+              onPress={() => navigation.navigate('TagsRegister')}
+            >
+              <ButtonText>Ir para a próxima etapa</ButtonText>
+          </ButtonRegister>
         </InternContainer>
+      </ScrollView>
     </Container>
   )
 }
