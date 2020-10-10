@@ -30,7 +30,13 @@ export default function Routes(){
                         // headerShown: false 
                     }} 
                 />
-                <Stack.Screen name='Register' component={RegisterRoutes} />
+                <Stack.Screen 
+                  name='Register' 
+                  component={RegisterRoutes} 
+                  options={{
+                  headerShown: false,
+                }}
+                />
                 {/* <Stack.Screen name='Main' component={Main} /> */}
                 {/* <Stack.Screen name='Profile' component={Profile} /> */}
                 {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
