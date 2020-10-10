@@ -38,7 +38,9 @@ const Register = () => {
           >
             <ButtonText>Vamos Lá</ButtonText>
           </ButtonRegister>
-          <BackButton>
+          <BackButton
+            onPress={() => navigation.goBack()}
+          >
             <Comment1>Voltar ao Início</Comment1>
           </BackButton>
         </ViewButton>
