@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Fontisto, Feather, Ionicons, EvilIcons } from '@expo/vector-icons';
+import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
 
-import post1 from './Assets/1.jpg'
+import post1 from './Assets/2.jpg'
 
 import { 
   Container, 
@@ -21,11 +21,13 @@ const post = [
     id: 1,
     title: 'Aplicativo de Mensagens',
     comments: 20,
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     tag: 'Tecnologia'
   },
   {
     id: 2,
     title: 'Mercado Livre de Livros',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     comments: 100,
     tag: 'Leitura'
   },
@@ -33,36 +35,42 @@ const post = [
     id: 3,
     title: 'Aplicativo de Mensagens',
     comments: 20,
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     tag: 'Tecnologia'
   },
   {
     id: 4,
     title: 'Mercado Livre de Livros',
     comments: 100,
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     tag: 'Leitura'
   },
   {
     id: 5,
     title: 'Aplicativo de Mensagens',
     comments: 20,
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     tag: 'Tecnologia'
   },
   {
     id: 6,
     title: 'Mercado Livre de Livros',
     comments: 100,
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     tag: 'Leitura'
   },
   {
     id: 7,
     title: 'Aplicativo de Mensagens',
     comments: 20,
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     tag: 'Tecnologia'
   },
   {
     id: 8,
     title: 'Mercado Livre de Livros',
     comments: 100,
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
     tag: 'Leitura'
   },
   
@@ -110,22 +118,33 @@ const Main = () => {
 
         <FlatList 
           data={post}
+          style={{ marginBottom: 20 }}
           renderItem={({ item }) => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: "center", marginTop: 20 }}
+            >
               <Image 
+                style={{ width: '95%', height: 200, borderRadius: 10 }}
                 source={post1}
               />
-              <View>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '90%', marginTop: 10, alignItems: "center" }} >
                 <View>
                   <Title>{item.title}</Title>
-                  <Comment>{item.title}</Comment>
+                  <Comment 
+                    numberOfLines={1}
+                    ellipsizeMode='tail'
+                    style={{ width: 280 }}
+                  >{item.description}</Comment>
                 </View>
-                <View>
-                  <TouchableOpacity>
-                    <Ionicons name="ios-arrow-forward" size={20} color="#000" />
+                <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                  <TouchableOpacity style={{ marginHorizontal: 2 }}>
+                    <Feather name="send" size={15} color="#000" />
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity style={{ marginHorizontal: 2 }}>
                     <EvilIcons name="comment" size={24} color="black" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ marginHorizontal: 2 }}>
+                    <Foundation name="dollar" size={25} color="black" />
                   </TouchableOpacity>
                 </View>
               </View>
