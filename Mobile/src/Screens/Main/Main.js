@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import  Api from '../../Services/Api';
 import { ScrollView, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage'; 
 import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
 
 import post1 from './Assets/2.jpg'
@@ -16,70 +18,26 @@ import {
   Title
 } from './styles';
 
-const post = [
-  {
-    id: 1,
-    title: 'Aplicativo de Mensagens',
-    comments: 20,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    tag: 'Tecnologia'
-  },
-  {
-    id: 2,
-    title: 'Mercado Livre de Livros',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    comments: 100,
-    tag: 'Leitura'
-  },
-  {
-    id: 3,
-    title: 'Aplicativo de Mensagens',
-    comments: 20,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    tag: 'Tecnologia'
-  },
-  {
-    id: 4,
-    title: 'Mercado Livre de Livros',
-    comments: 100,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    tag: 'Leitura'
-  },
-  {
-    id: 5,
-    title: 'Aplicativo de Mensagens',
-    comments: 20,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    tag: 'Tecnologia'
-  },
-  {
-    id: 6,
-    title: 'Mercado Livre de Livros',
-    comments: 100,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    tag: 'Leitura'
-  },
-  {
-    id: 7,
-    title: 'Aplicativo de Mensagens',
-    comments: 20,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    tag: 'Tecnologia'
-  },
-  {
-    id: 8,
-    title: 'Mercado Livre de Livros',
-    comments: 100,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-    tag: 'Leitura'
-  },
-  
-
-]
-
 const Main = () => {
-  const navigation = useNavigation()
+  const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    GetPosts();
+  }, [])
+
+  async function GetPosts(){
+    const token = await AsyncStorage.getItem('@brainstorm_Token');
+    await Api.get('post-findAll')
+      .then(resp => {
+        setPosts(resp.data);
+        console.log(resp.data);
+      })
+      .catch(err => {
+        console.log(err.request);
+      })
+  };
+
+  const navigation = useNavigation()
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#FFF" }}>
       <Container>
@@ -117,12 +75,15 @@ const Main = () => {
         </View>
 
         <FlatList 
-          data={post}
+          data={posts}
           style={{ marginBottom: 20 }}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={{ alignItems: "center", marginTop: 20 }}
-            >
+              onPress={() => navigation.navigate('PostDetails', {
+                post: item,
+              })}
+              >
               <Image 
                 style={{ width: '95%', height: 200, borderRadius: 10 }}
                 source={post1}
@@ -134,7 +95,7 @@ const Main = () => {
                     numberOfLines={1}
                     ellipsizeMode='tail'
                     style={{ width: 280 }}
-                  >{item.description}</Comment>
+                  >{item.content}</Comment>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: "center" }}>
                   <TouchableOpacity style={{ marginHorizontal: 2 }}>

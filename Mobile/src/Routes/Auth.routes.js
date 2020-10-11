@@ -41,7 +41,13 @@ export default function Routes(){
               }}
             />
 
-            {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
+            <Stack.Screen 
+              name='PostDetails' 
+              component={PostDetails} 
+              options={{
+                headerShown: false,
+              }}
+            />
             </Stack.Navigator>
         </NavigationContainer>
     )

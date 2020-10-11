@@ -13,7 +13,7 @@ export const BackBtnCont = styled.View`
 
 export const BackBtn = styled.TouchableOpacity`
   padding-left: 20px;
-  padding-top: 25px;
+  padding-top: 30px;
 `;
 
 export const OptionsBtn = styled.TouchableOpacity`
