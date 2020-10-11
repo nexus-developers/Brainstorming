@@ -4,7 +4,6 @@ import { View, ScrollView, Alert } from 'react-native';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage'; 
 
-
 import { 
   Container, 
   BackBtnCont, 
@@ -28,8 +27,6 @@ const Profile = ({ navigation }) => {
   useEffect(() => {
     GetUserToken();
     GetUserPosts();
-    console.log(userToken);
-    console.log(userPosts);
   }, [])
 
   async function GetUserPosts() {
