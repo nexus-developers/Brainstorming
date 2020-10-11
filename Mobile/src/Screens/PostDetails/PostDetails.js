@@ -187,6 +187,8 @@ const PostDetails = ({ route }) => {
             style={{ marginBottom: 20 }}
             renderItem={({ item }) => (
               <View style={{ flexDirection: 'column', marginVertical: 10 }}>
+                {console.log(item)}
+                <Text style={{ width: '89%', alignSelf: 'flex-end', fontFamily: 'Regular' }}>{item.user.name}</Text>
                 <View style={{ flexDirection: 'row', alignItems: "flex-start", justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 5}}>
                     <UserImg source={{ uri: 'https://api.adorable.io/avatars/50/abott@adorable.png' }}/>
