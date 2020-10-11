@@ -31,11 +31,11 @@ export default function Routes(){
               }}
               />
             <Stack.Screen 
-                name='Login' 
-                component={Login} 
-                options={{
-                    headerShown: false 
-                }}
+              name='Login' 
+              component={Login} 
+              options={{
+                  headerShown: false 
+              }}
             />
             <Stack.Screen 
               name='Register' 
@@ -88,13 +88,19 @@ export default function Routes(){
             />
 
             <Stack.Screen 
-                name='Main' 
-                component={Main} 
-                options={{
-                    headerShown: false,
-                }}
+              name='Main' 
+              component={Main} 
+              options={{
+                  headerShown: false,
+              }}
             />
-            {/* <Stack.Screen name='Profile' component={Profile} /> */}
+            <Stack.Screen 
+              name='Profile' 
+              component={Profile} 
+              options={{
+                headerShown: false,
+              }}
+            />
             {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
             </Stack.Navigator>
         </NavigationContainer>
