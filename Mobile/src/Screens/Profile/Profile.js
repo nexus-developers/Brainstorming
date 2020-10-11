@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import  Api from '../../Services/Api';
 import { View, ScrollView, Alert } from 'react-native';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
@@ -22,6 +22,36 @@ import {
 } from './styles';
 
 const Profile = ({ navigation }) => {
+  const [userToken, setUserToken] = useState('');
+  const [userPosts, setUserPosts] = useState([]);
+
+  useEffect(() => {
+    GetUserToken();
+    GetUserPosts();
+    console.log(userToken);
+    console.log(userPosts);
+  }, [])
+
+  async function GetUserPosts() {
+    const posts = await Api.get('/post', {
+      headers: {
+        'Authorization': `Bearer: ${userToken}`
+      },
+    })
+      .then(resp => {
+        setUserPosts(posts);
+        console.log(resp.data);
+      })
+      .catch(err => {
+        console.log(err.request);
+      })
+  };
+
+  async function GetUserToken(){
+    const token = await AsyncStorage.getItem('@brainstorm_Token');
+    setUserToken(token);
+  };
+
   async function RemoveUserToken(){
     await AsyncStorage.removeItem('@brainstorm_Token');
     navigation.navigate('Wellcome');
@@ -51,7 +81,7 @@ const Profile = ({ navigation }) => {
                 }
               ]
             )}>
-            <SimpleLineIcons name="options-vertical" size={24} color="black" style={{ paddingTop: 25, paddingRight: 20 }} />
+            <Ionicons name="ios-log-out" size={26} color="black" style={{ paddingTop: 20, paddingRight: 20 }} />
           </OptionsBtn>
         </BackBtnCont>
         <ProfileCont>
