@@ -90,8 +90,8 @@ const CreatePost = () => {
         <View>
           <View style={{ backgroundColor: '#8E88D0', justifyContent: 'center', alignItems: 'center', borderBottomEndRadius: 20, borderBottomLeftRadius: 20, paddingVertical: 10 }}>
             <TouchableOpacity
-
               style={{ position: 'absolute', top: 5, left: 5, padding: 20 }}
+              onPress={() => navigation.goBack()}
             >
               <Ionicons name="ios-arrow-back" size={24} color="#FFF" />
             </TouchableOpacity>

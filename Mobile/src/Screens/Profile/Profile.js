@@ -129,7 +129,7 @@ const Profile = ({ navigation }) => {
           <AreaDescription>{user.area}</AreaDescription>
           <StatisticsOutterCont>
             <StatisticsInnerCont>
-              <Statistic>{userPosts.length + comments.length + 100}</Statistic>
+              <Statistic>{(userPosts.length + comments.length) * 100}</Statistic>
               <FieldDescription>Pontos</FieldDescription>
             </StatisticsInnerCont>
             <StatisticsInnerCont>
@@ -154,6 +154,9 @@ const Profile = ({ navigation }) => {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={{ alignItems: "center", marginTop: 20 }}
+              onPress={() => navigation.navigate('PostDetails', {
+                post: item,
+              })}
             >
               <Image 
                 style={{ width: '95%', height: 200, borderRadius: 10 }}

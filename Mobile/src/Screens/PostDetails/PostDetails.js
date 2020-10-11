@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+import  Api from '../../Services/Api';
+import { View, ScrollView, Image, Text, TouchableOpacity, Linking, FlatList, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
+import { TagSelect } from 'react-native-tag-select'
+import AsyncStorage from '@react-native-community/async-storage'; 
 
 import { 
   parseISO, 
@@ -21,8 +24,14 @@ import {
   UserName,
   CreationDate,
   Description,
-  TagCard,
-  TagText
+  CommentsCont,
+  CommentsTitle,
+  InputTitle,
+  CommentInput,
+  SubmitCommentBtn,
+  SubmitText,
+  FlatlistCard,
+  UserImg
 } from './styles';
 
 import Img from '../Main/Assets/2.jpg';
@@ -30,6 +39,10 @@ import Img from '../Main/Assets/2.jpg';
 const PostDetails = ({ route }) => {
   const [post, setPost] = useState(route.params.post);
   const [tags, setTags] = useState([]);
+  const [user, setUser] = useState({});
+
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState('');
 
   const firstDate = parseISO(post.createdAt);
   const secondDate = parseISO(post.updatedAt);
@@ -41,8 +54,12 @@ const PostDetails = ({ route }) => {
   );
 
   useEffect(() => {
+    GetPostUser();
     FillTagsArray();
-    console.log(tags);
+    GetPostComments();
+
+    // console.log(post);
+    console.log(comments);
   }, [])
 
   function FillTagsArray() {
@@ -50,21 +67,52 @@ const PostDetails = ({ route }) => {
     setTags(tagsArray);
   }
 
-  // async function GetUser(){
-  //   const token = await AsyncStorage.getItem('@brainstorm_Token');
-  //   await Api.get('/users', {
-  //     headers: {
-  //       'Authorization': `Bearer: ${token}`
-  //     },
-  //   })
-  //     .then(resp => {
-  //       setUser(resp.data);
-  //       console.log(resp.data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err.request);
-  //     })
-  // }
+  async function GetPostUser(){
+    await Api.get(`/users/${post.user_id}`)
+      .then(resp => {
+        setUser(resp.data);
+      })
+      .catch(err => {
+        console.log(err.request);
+      })
+  }
+
+  async function PostComment() {
+    const token = await AsyncStorage.getItem('@brainstorm_Token');
+    await Api.post('/comment', {
+      "content": comment,
+      "post_id": post.id
+    }, {
+      headers: {
+        'Authorization': `Bearer: ${token}`
+      },
+    })
+      .then(resp => {
+        GetPostComments();
+      })
+      .catch(err => {
+        console.log(err.request);
+      })
+  }
+
+  async function GetPostComments(){
+    const token = await AsyncStorage.getItem('@brainstorm_Token');
+    await Api.get(`/comment/${post.id}`, {
+      headers: {
+        'Authorization': `Bearer: ${token}`
+      },
+    })
+      .then(resp => {
+        setComments(resp.data);
+      })
+      .catch(err => {
+        console.log(err.request);
+      })
+  }
+
+  function SendWhatsapp() {
+    Linking.openURL(`whatsapp://send?&text=teste`);
+  }
 
   const navigation = useNavigation()
   return (
@@ -74,60 +122,88 @@ const PostDetails = ({ route }) => {
           <BackBtn onPress={() => navigation.goBack()}>
             <Ionicons name="ios-arrow-back" size={24} color="black" />
           </BackBtn>
-          <OptionsBtn onPress={() => Alert.alert(
-              'Sair', 
-              'Deseja mesmo sair da sua conta?',
-              [
-                {
-                  text: "Cancelar",
-                  onPress: () => {},
-                  style: "cancel"
-                },
-                {
-                  text: "Sair",
-                  onPress: () => {
-                    RemoveUserToken();
-                  }
-                }
-              ]
-            )}>
-            <Ionicons name="ios-log-out" size={26} color="black" style={{ paddingTop: 30, paddingRight: 20 }} />
-          </OptionsBtn>
         </BackBtnCont>
         <PostTitle>{post.title}</PostTitle>
-        <UserName>Usuário</UserName>
+        <UserName>{user.name}</UserName>
         <Image
           style={{ width: '90%', height: 200, alignSelf: 'center', borderRadius: 10 }}
           source={Img} 
         />
         <View style={{ width: '90%', alignSelf: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <View>
+          <View style={{ width: '50%' }}>
             <Text style={{ fontSize: 16, fontFamily: 'Bold', marginTop: 20 }}>DESCRIÇÃO</Text>
             <CreationDate>{relative}</CreationDate>
-            <FlatList 
-              data={tags}
-              style={{ marginTop: 15, marginBottom: 5 }}
-              horizontal={true}
-              renderItem={({ item }) => (
-                <TagCard>
-                  <TagText>{item}</TagText>
-                </TagCard>
-              )}
-            />
           </View>
           <View style={{ flexDirection: 'row', alignItems: "center" }}>
-            <TouchableOpacity style={{ marginHorizontal: 2 }}>
+            <TouchableOpacity style={{ marginHorizontal: 2 }} onPress={() => SendWhatsapp()}>
               <Feather name="send" size={17} color="#000" />
-            </TouchableOpacity>
-            <TouchableOpacity style={{ marginHorizontal: 2 }}>
-              <EvilIcons name="comment" size={24} color="black" />
             </TouchableOpacity>
             <TouchableOpacity style={{ marginHorizontal: 2 }}>
               <Foundation name="dollar" size={25} color="black" />
             </TouchableOpacity>
           </View>
         </View>
+        <View style={{ width: '90%', alignSelf: 'center', marginTop: 10 }}>
+          <TagSelect 
+            data={tags}
+            itemStyle={{
+              height: 30,
+              textAlign: 'center',
+              padding: 5,
+              borderRadius: 5,
+              borderColor: '#FDC75B',
+              backgroundColor: '#FDC75B',
+            }}
+            itemLabelStyle={{
+              color: 'white',
+            }}
+            itemStyleSelected={{
+              height: 30,
+              textAlign: 'center',
+              padding: 5,
+              borderRadius: 5,
+              borderColor: '#FDC75B',
+              backgroundColor: '#FDC75B',
+            }}
+            itemLabelStyleSelected={{
+              color: 'white',
+            }}
+          />
+        </View>
         <Description>{post.content}</Description>
+        <CommentsCont>
+          <CommentsTitle>COMENTÁRIOS</CommentsTitle>
+          <FlatList 
+            data={comments}
+            style={{ marginBottom: 20 }}
+            renderItem={({ item }) => (
+              <FlatlistCard>
+                <View style={{ flexDirection: 'row' }}>
+                  <UserImg source={{ uri: 'https://api.adorable.io/avatars/50/abott@adorable.png' }}/>
+                </View>
+                <Text>{item.content}</Text>
+              </FlatlistCard>
+            )}
+          />
+          <InputTitle>Deixe aqui o seu comentário:</InputTitle>
+          <CommentInput
+            autoCapitalize='words'
+            autoCompleteType='name'
+            multiline={true}
+            value={comment}
+            onChangeText={e => setComment(e)}
+          />
+          <SubmitCommentBtn onPress={() => {
+            if (comment === '') {
+              Alert.alert('Ops', 'Preencha o campo de comentário para envia-lo')
+            } else {
+              PostComment();
+              setComment('');
+            }
+          }}>
+            <SubmitText>Enviar Comentário</SubmitText>
+          </SubmitCommentBtn>
+        </CommentsCont>
       </ScrollView>
     </Container>
   )

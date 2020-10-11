@@ -6,6 +6,7 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 import Main from '../Screens/Main/Main'
 import Profile from '../Screens/Profile/Profile'
 import Wellcome from '../Screens/Wellcome/Wellcome'
+import Login from '../Screens/Login/Login'
 import PostDetails from '../Screens/PostDetails/PostDetails'
 import CreatePost from '../Screens/CreatePost/CreatePost'
 
@@ -39,6 +40,14 @@ export default function Routes(){
               component={Wellcome} 
               options={{ 
                 headerShown: false 
+              }}
+            />
+
+            <Stack.Screen 
+              name='Login' 
+              component={Login} 
+              options={{
+                  headerShown: false 
               }}
             />
 

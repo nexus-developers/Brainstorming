@@ -31,11 +31,10 @@ export const UserName = styled.Text`
   font-size: 16px;
   font-family: 'Light';
   margin-top: 5px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 `;
 
 export const CreationDate = styled.Text`
-  align-self: center;
   font-size: 14px;
   font-family: 'Light';
 `;
@@ -49,14 +48,62 @@ export const Description = styled.Text`
   /* text-align: center; */
 `;
 
-export const TagCard = styled.View`
-  border-width: 1px;
-  border-radius: 5px;
-  border-color: #FDC75B;
-  background-color: #FDC75B;
+export const CommentsCont = styled.View`
+  width: 90%;
+  align-self: center;
 `;
 
-export const TagText = styled.Text`
-  padding: 5px;
+export const CommentsTitle = styled.Text`
+  margin-top: 25px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #CACACA;
+  font-family: 'Regular';
+`;
+
+export const InputTitle = styled.Text`
+  color: #3B2C33;
+  font-size: 16px;
+  font-family: 'Regular';
+`;
+
+export const CommentInput = styled.TextInput`
+  background-color: #F7F8FA;
+  border-radius: 10px;
+  height: 40px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: 'Regular';
+`;
+
+export const SubmitCommentBtn = styled.TouchableOpacity`
+  align-self: center;
+  background-color: #66A3FE;
+  border-radius: 25;
+  margin-bottom: 30px;
+`;
+
+export const SubmitText = styled.Text`
   color: white;
+  font-size: 16px;
+  font-family: 'Regular';
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+`;
+
+export const FlatlistCard = styled.View`
+  width: 100%;
+  background-color: #F7F8FA;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+`;
+
+export const UserImg = styled.Image`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
 `;
