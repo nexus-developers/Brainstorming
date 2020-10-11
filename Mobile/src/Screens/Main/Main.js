@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import  Api from '../../Services/Api';
 import { ScrollView, View, Text, TouchableOpacity, FlatList, Image, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage'; 
 import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native'
 
 import post1 from './Assets/2.jpg'
 
@@ -21,9 +22,13 @@ import {
 const Main = () => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    GetPosts();
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      GetPosts();
+    },[])
+  )
+
+
 
   async function GetPosts(){
     const token = await AsyncStorage.getItem('@brainstorm_Token');
