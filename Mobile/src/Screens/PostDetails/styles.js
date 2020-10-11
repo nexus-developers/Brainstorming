@@ -95,7 +95,7 @@ export const SubmitText = styled.Text`
 `;
 
 export const FlatlistCard = styled.View`
-  width: 100%;
+  width: 89%;
   background-color: #F7F8FA;
   margin-bottom: 10px;
   padding: 10px;
@@ -103,7 +103,9 @@ export const FlatlistCard = styled.View`
 `;
 
 export const UserImg = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   border-radius: 20px;
+  border-width: 2px;
+  border-color: #FDC75B
 `;

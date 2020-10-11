@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import  Api from '../../Services/Api';
 import { View, ScrollView, Image, Text, TouchableOpacity, Linking, FlatList, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
+import { Feather, Ionicons, Foundation } from '@expo/vector-icons';
 import { TagSelect } from 'react-native-tag-select'
 import AsyncStorage from '@react-native-community/async-storage'; 
 
 import { 
   parseISO, 
-  format, 
   formatRelative, 
-  formatDistance,
 } from 'date-fns';
 
 import { pt } from 'date-fns/locale';
@@ -53,12 +51,23 @@ const PostDetails = ({ route }) => {
     {locale: pt}
   );
 
+  function formatDate(createdAt, updatedAt){
+    const parsedCreatedAt = parseISO(createdAt)
+    const parsedUpdatedAt = parseISO(updatedAt)
+
+    const dateFormated = formatRelative(
+      parsedCreatedAt,
+      parsedUpdatedAt,
+      { locale: pt }
+    )
+
+    return dateFormated
+  }
+
   useEffect(() => {
     GetPostUser();
     FillTagsArray();
     GetPostComments();
-
-    // console.log(post);
     console.log(comments);
   }, [])
 
@@ -177,12 +186,17 @@ const PostDetails = ({ route }) => {
             data={comments}
             style={{ marginBottom: 20 }}
             renderItem={({ item }) => (
-              <FlatlistCard>
-                <View style={{ flexDirection: 'row' }}>
-                  <UserImg source={{ uri: 'https://api.adorable.io/avatars/50/abott@adorable.png' }}/>
+              <View style={{ flexDirection: 'column', marginVertical: 10 }}>
+                <View style={{ flexDirection: 'row', alignItems: "flex-start", justifyContent: 'space-between' }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 5}}>
+                    <UserImg source={{ uri: 'https://api.adorable.io/avatars/50/abott@adorable.png' }}/>
+                  </View>
+                  <FlatlistCard>
+                    <Text style={{ fontFamily: 'Regular', color: '#3B2C33' }}>{item.content}</Text>
+                  </FlatlistCard>
                 </View>
-                <Text>{item.content}</Text>
-              </FlatlistCard>
+                <Text style={{ alignSelf: 'flex-end', fontFamily: 'Light', fontSize: 12 }}>{formatDate(item.createdAt, item.updatedAt)}</Text>
+              </View>
             )}
           />
           <InputTitle>Deixe aqui o seu comentário:</InputTitle>
