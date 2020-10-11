@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFonts } from 'expo-font';
+import AsyncStorage from '@react-native-community/async-storage';
 
 // Routes
 import Routes from './src/Routes/Routes'
+import AuthRoutes from './src/Routes/Auth.routes'
 
 export default function App() {
+  const [ token, setToken ] = useState('')
+
+  useEffect(() => {
+    getToken()
+  }, [])
+
   const [ loaded ] = useFonts({
     'Light': require('./assets/Fonts/OpenSans-Light.ttf'),
     'Bold': require('./assets/Fonts/OpenSans-Bold.ttf'),
@@ -13,11 +21,29 @@ export default function App() {
     'Extrabold': require('./assets/Fonts/OpenSans-ExtraBold.ttf'),
   })
 
-  if(!loaded){
-    return null
+  async function getToken(){
+    const value = await AsyncStorage.getItem('@brainstorm_Token')
+    setToken(value)
+
+    console.log(value);
+
   }
 
-  return (<Routes />)
+  if(!loaded){
+    return null
+  } 
+
+  return(
+    <>
+      {
+        token === null ? (
+          <Routes/>
+        ) : (
+          <AuthRoutes/>
+        )
+      }
+    </>
+  )
 }
 
 
