@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Fontisto, Feather, Ionicons, EvilIcons } from '@expo/vector-icons';
 
 import post1 from './Assets/1.jpg'
@@ -69,6 +70,8 @@ const post = [
 ]
 
 const Main = () => {
+  const navigation = useNavigation()
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#FFF" }}>
       <Container>
@@ -77,7 +80,7 @@ const Main = () => {
             <Fontisto name="atom" size={24} color="black" />
             <ScreenTitle>Brainstorming</ScreenTitle>
           </View>
-          <User>
+          <User onPress={() => navigation.navigate('Profile')}>
             <UserPhoto
               source={{ uri: 'https://api.adorable.io/avatars/50/abott@adorable.png' }}
             />

@@ -7,11 +7,17 @@ export const Container = styled.View`
 
 export const BackBtnCont = styled.View`
   width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const BackBtn = styled.TouchableOpacity`
   padding-left: 20px;
   padding-top: 25px;
+`;
+
+export const OptionsBtn = styled.TouchableOpacity`
+
 `;
 
 export const ProfileCont = styled.View`

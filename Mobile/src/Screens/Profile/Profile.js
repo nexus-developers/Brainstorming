@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
 import  Api from '../../Services/Api';
+import { View, ScrollView, Alert } from 'react-native';
+import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage'; 
+
 
 import { 
   Container, 
   BackBtnCont, 
-  BackBtn, 
+  BackBtn,
+  OptionsBtn,
   ProfileCont, 
   ImgCont, 
   Img, 
@@ -19,7 +22,10 @@ import {
 } from './styles';
 
 const Profile = ({ navigation }) => {
-  
+  async function RemoveUserToken(){
+    await AsyncStorage.removeItem('@brainstorm_Token');
+    navigation.navigate('Wellcome');
+  };
 
   return (
     <Container>
@@ -28,6 +34,25 @@ const Profile = ({ navigation }) => {
           <BackBtn onPress={() => navigation.goBack()}>
             <Ionicons name="ios-arrow-back" size={24} color="black" />
           </BackBtn>
+          <OptionsBtn onPress={() => Alert.alert(
+              'Sair', 
+              'Deseja mesmo sair da sua conta?',
+              [
+                {
+                  text: "Cancelar",
+                  onPress: () => {},
+                  style: "cancel"
+                },
+                {
+                  text: "Sair",
+                  onPress: () => {
+                    RemoveUserToken();
+                  }
+                }
+              ]
+            )}>
+            <SimpleLineIcons name="options-vertical" size={24} color="black" style={{ paddingTop: 25, paddingRight: 20 }} />
+          </OptionsBtn>
         </BackBtnCont>
         <ProfileCont>
           <ImgCont>
