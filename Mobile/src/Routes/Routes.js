@@ -12,6 +12,7 @@ import Register from '../Screens/Register/Register'
 import FormRegister from '../Screens/Register/FormRegister/FormRegister'
 import AreasRegister from '../Screens/Register/Areas/Areas'
 import TagsRegister from '../Screens/Register/Tags/Tags'
+import CreatePost from '../Screens/CreatePost/CreatePost'
 
 const Stack = createStackNavigator()
 
@@ -101,6 +102,15 @@ export default function Routes(){
                 headerShown: false,
               }}
             />
+
+            <Stack.Screen 
+              name='CreatePost'
+              component={CreatePost}
+              options={{
+                headerShown: false
+              }}
+            />
+
             {/* <Stack.Screen name='PostDetails' component={PostDetails} /> */}
             </Stack.Navigator>
         </NavigationContainer>

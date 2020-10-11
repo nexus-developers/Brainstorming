@@ -7,6 +7,7 @@ import Main from '../Screens/Main/Main'
 import Profile from '../Screens/Profile/Profile'
 import Wellcome from '../Screens/Wellcome/Wellcome'
 import PostDetails from '../Screens/PostDetails/PostDetails'
+import CreatePost from '../Screens/CreatePost/CreatePost'
 
 const Stack = createStackNavigator()
 
@@ -38,6 +39,14 @@ export default function Routes(){
               component={Wellcome} 
               options={{ 
                 headerShown: false 
+              }}
+            />
+
+            <Stack.Screen 
+              name='CreatePost'
+              component={CreatePost}
+              options={{
+                headerShown: false
               }}
             />
 
