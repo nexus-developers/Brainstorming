@@ -30,8 +30,8 @@ export const Card = styled.TouchableOpacity`
   align-items: center;
   flex-direction: column;
   background-color: #FFF;
-  /* border-width: 3px;
-  border-color: #FDC75B; */
+  border-width: ${ props => props.Selected ? '3px' : '0' };
+  border-color: ${ props => props.Selected ? '#FDC75B' : '#FFF'};
 `
 export const ImageCard = styled.Image`
   width: 120px;

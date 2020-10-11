@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
 import { 
     Container,
@@ -11,9 +11,31 @@ import {
     ButtonText
 } from './styles';
 
-import { ScrollView } from 'react-native'
+import { ScrollView, Alert } from 'react-native'
 
 const FormRegister = () => {
+
+  const [ name, setName ] = useState('')
+  const [ portfolio, setPortfolio ] = useState('')
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
+
+  function VerifyInformations(){
+    if(name === '' || email === '' || password === ''){
+      Alert.alert(
+        'Ops! Falha ao receber seus dados',
+        'Algum dos campos obrigatórios não foi preenchido'
+      )
+    } else {
+      navigation.navigate('AreasRegister', {
+        name: name,
+        email: email,
+        portfolio: portfolio,
+        password: password
+      })
+    }
+  }
+
   const navigation = useNavigation()
   return (
       <Container>
@@ -27,6 +49,8 @@ const FormRegister = () => {
                 autoCompleteType='name'
                 maxLength={35}
                 multiline={false}
+                value={name}
+                onChangeText={e => setName(e)}
               />
               <FormTitle>Me informa o link do teu portfólio?</FormTitle>
               <Input
@@ -34,6 +58,8 @@ const FormRegister = () => {
                 autoCompleteType='name'
                 maxLength={35}
                 multiline={false}
+                value={portfolio}
+                onChangeText={e => setPortfolio(e)}
               />
               <FormTitle>Qual o E-mail que você mais usa?*</FormTitle>
               <Input
@@ -41,15 +67,19 @@ const FormRegister = () => {
                 autoCompleteType='email'
                 maxLength={35}
                 multiline={false}
+                value={email}
+                onChangeText={e => setEmail(e)}
               />
               <FormTitle>Me informa uma senha para acesso?*</FormTitle>
               <Input 
                 secureTextEntry={true}
                 maxLength={25}
+                value={password}
+                onChangeText={e => setPassword(e)}
               />
             </FormView>
             <ButtonRegister
-              onPress={() => navigation.navigate('AreasRegister')}
+              onPress={() => VerifyInformations()}
             >
               <ButtonText>Próxima etapa</ButtonText>
             </ButtonRegister>

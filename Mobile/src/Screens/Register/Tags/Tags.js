@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ScrollView, Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, Alert, StyleSheet } from 'react-native';
 import { TagSelect } from 'react-native-tag-select'
-import { useNavigation } from '@react-navigation/native'
-
+import { useNavigation, StackActions } from '@react-navigation/native'
+import  Api from '../../../Services/Api'
 
 import { 
   Container,
@@ -12,9 +12,49 @@ import {
   ButtonText
 } from './styles';
 
-const Tags = () => {
+const Tags = ({ route }) => {
+  const [ user, setUser ] = useState(route.params)
   const [ tags, setTags ] = useState([])
   const navigation = useNavigation()
+
+  console.log(route.params);
+
+  async function RegisterUser(){
+    if(tags.length !== 0){
+      const transformTags = tags.join(', ')
+      const data = {
+        name: user.name,
+        email: user.email,
+        experience: user.experience,
+        password: user.password,
+        area: user.area,
+        portfolio: user.portfolio,
+        skills: user.skills,
+        tags: transformTags
+      }
+
+      await Api.post('/users', data)
+        .then(resp => {
+          Alert.alert(
+            'Cadastro de Usuário',
+            'Seu cadastro foi efetuado com sucesso!'
+          )
+          navigation.dispatch(StackActions.popToTop())
+        })
+        .catch(err => {
+          Alert.alert(
+            'Cadastro de Usuário',
+            'Houve um erro ao cadastrar seu usuário'
+          )
+          console.log(err.request);
+        })
+    } else {
+      Alert.alert(
+        'Ops! Falha ao receber suas tags',
+        'É necessário selecionar alguma tag, pois assim poderemos trazer o melhor conteúdo para você!'
+      )
+    }
+  }
 
   const data = [
     { id: 1, label: 'Saúde' },
@@ -67,7 +107,7 @@ const Tags = () => {
             }}
           />
             <ButtonRegister
-              onPress={() => navigation.navigate('AreasRegister')}
+              onPress={() => RegisterUser()}
             >
               <ButtonText>Próxima etapa</ButtonText>
             </ButtonRegister>
