@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import  Api from '../../Services/Api';
-import { View, ScrollView, Alert } from 'react-native';
-import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
+import { FlatList, ScrollView, Alert, Text, View, TouchableOpacity, Image } from 'react-native';
+import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-community/async-storage'; 
+import post1 from '../Main/Assets/2.jpg'
 
+import { Title, Comment } from '../Main/styles'
 
 import { 
   Container, 
@@ -23,6 +25,7 @@ import {
 
 const Profile = ({ navigation }) => {
   const [userPosts, setUserPosts] = useState([]);
+  const [comments, setComments ] = useState([])
   const [user, setUser] = useState({})
 
   useEffect(() => {
@@ -31,6 +34,10 @@ const Profile = ({ navigation }) => {
 
   useEffect(() => {
     GetUser()
+  }, [])
+
+  useEffect(() => {
+    getComment()
   }, [])
 
   async function GetUser(){
@@ -42,6 +49,22 @@ const Profile = ({ navigation }) => {
     })
       .then(resp => {
         setUser(resp.data);
+        console.log(resp.data);
+      })
+      .catch(err => {
+        console.log(err.request);
+      })
+  }
+
+  async function getComment(){
+    const token = await AsyncStorage.getItem('@brainstorm_Token');
+    await Api.get('/comment', {
+      headers: {
+        'Authorization': `Bearer: ${token}`
+      },
+    })
+      .then(resp => {
+        setComments(resp.data);
         console.log(resp.data);
       })
       .catch(err => {
@@ -64,13 +87,12 @@ const Profile = ({ navigation }) => {
       })
   };
   
-
-
-
   async function RemoveUserToken(){
     await AsyncStorage.removeItem('@brainstorm_Token');
     navigation.navigate('Wellcome');
   };
+
+
 
   return (
     <Container>
@@ -103,23 +125,61 @@ const Profile = ({ navigation }) => {
           <ImgCont>
             <Img source={{ uri: 'https://api.adorable.io/avatars/50/abott@adorable.png' }}/>
           </ImgCont>
-          <UserName>João Muribeca</UserName>
-          <AreaDescription>Programador Front-End</AreaDescription>
+          <UserName>{user.name}</UserName>
+          <AreaDescription>{user.area}</AreaDescription>
           <StatisticsOutterCont>
             <StatisticsInnerCont>
-              <Statistic>3582</Statistic>
+              <Statistic>{userPosts.length + comments.length + 100}</Statistic>
               <FieldDescription>Pontos</FieldDescription>
             </StatisticsInnerCont>
             <StatisticsInnerCont>
-              <Statistic>10</Statistic>
+              <Statistic>{userPosts.length}</Statistic>
               <FieldDescription>Posts</FieldDescription>
             </StatisticsInnerCont>
             <StatisticsInnerCont>
-              <Statistic>4</Statistic>
+              <Statistic>{comments.length}</Statistic>
               <FieldDescription>Comentários</FieldDescription>
             </StatisticsInnerCont>
           </StatisticsOutterCont>
         </ProfileCont>
+
+        <View style={{ marginTop: 30, flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 15 }}>
+          <Text style={{ fontFamily: 'Regular', color: '#CACACA' }}>SEUS POSTS</Text>
+        </View>
+
+        <FlatList 
+          data={userPosts}
+          style={{ marginBottom: 20 }}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={{ alignItems: "center", marginTop: 20 }}
+            >
+              <Image 
+                style={{ width: '95%', height: 200, borderRadius: 10 }}
+                source={post1}
+              />
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '90%', marginTop: 10, alignItems: "center" }} >
+                <View>
+                  <Title>{item.title}</Title>
+                  <Comment 
+                    numberOfLines={1}
+                    ellipsizeMode='tail'
+                    style={{ width: 280 }}
+                  >{item.content}</Comment>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                  <TouchableOpacity style={{ marginHorizontal: 2 }}>
+                    <Feather name="send" size={15} color="#000" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ marginHorizontal: 2 }}>
+                    <EvilIcons name="comment" size={24} color="black" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
       </ScrollView>
     </Container>
   )
