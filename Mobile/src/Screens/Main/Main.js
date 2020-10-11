@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import  Api from '../../Services/Api';
-import { ScrollView, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, FlatList, Image, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage'; 
 import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
@@ -40,6 +40,7 @@ const Main = () => {
   const navigation = useNavigation()
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#FFF" }}>
+      <StatusBar backgroundColor='#FFF' barStyle='dark-content'/>
       <Container>
         <HeaderCont>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -52,7 +53,9 @@ const Main = () => {
             />
           </User>
         </HeaderCont>
-        <CreatePostComponent>
+        <CreatePostComponent
+          onPress={() => navigation.navigate('CreatePost')}
+        >
           <View style={{ flexDirection: 'row', marginLeft: 10 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
               <View style={{ backgroundColor: '#66A3FE', padding: 6, borderRadius:10, alignItems: 'center' }}>
