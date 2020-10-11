@@ -4,6 +4,7 @@ import { ScrollView, View, Text, TouchableOpacity, FlatList, Image, StatusBar } 
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage'; 
 import { Fontisto, Feather, Ionicons, EvilIcons, Foundation } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native'
 
 import post1 from './Assets/2.jpg'
 
