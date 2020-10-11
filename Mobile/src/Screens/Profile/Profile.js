@@ -21,33 +21,50 @@ import {
 } from './styles';
 
 const Profile = ({ navigation }) => {
-  const [userToken, setUserToken] = useState('');
   const [userPosts, setUserPosts] = useState([]);
+  const [user, setUser] = useState({})
 
   useEffect(() => {
-    GetUserToken();
-    GetUserPosts();
+    GetPosts();
   }, [])
 
-  async function GetUserPosts() {
-    const posts = await Api.get('/post', {
+  useEffect(() => {
+    GetUser()
+  }, [])
+
+  async function GetUser(){
+    const token = await AsyncStorage.getItem('@brainstorm_Token');
+    await Api.get('/users', {
       headers: {
-        'Authorization': `Bearer: ${userToken}`
+        'Authorization': `Bearer: ${token}`
       },
     })
       .then(resp => {
-        setUserPosts(posts);
+        setUser(resp.data);
         console.log(resp.data);
       })
       .catch(err => {
         console.log(err.request);
       })
-  };
+  }
 
-  async function GetUserToken(){
+  async function GetPosts(){
     const token = await AsyncStorage.getItem('@brainstorm_Token');
-    setUserToken(token);
+    await Api.get('/post', {
+      headers: {
+        'Authorization': `Bearer: ${token}`
+      },
+    })
+      .then(resp => {
+        setUserPosts(resp.data);
+      })
+      .catch(err => {
+        console.log(err.request);
+      })
   };
+  
+
+
 
   async function RemoveUserToken(){
     await AsyncStorage.removeItem('@brainstorm_Token');

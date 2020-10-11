@@ -24,9 +24,6 @@ export default function App() {
   async function getToken(){
     const value = await AsyncStorage.getItem('@brainstorm_Token')
     setToken(value)
-
-    console.log(value);
-
   }
 
   if(!loaded){
