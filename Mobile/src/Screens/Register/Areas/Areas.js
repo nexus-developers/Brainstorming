@@ -1,5 +1,5 @@
-import React from 'react';
-import { FlatList, StyleSheet, ScrollView } from 'react-native'
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, ScrollView, Alert} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { 
   Container,
@@ -43,12 +43,6 @@ const data = [
     info: 'dev'
   },
   {
-    id: 5,
-    name: 'UX Designer',
-    selected: false,
-    info: 'design'
-  },
-  {
     id: 6,
     name: 'Programador Back-End',
     selected: false,
@@ -68,7 +62,31 @@ const data = [
   }
 ]
 
-const Areas = () => {
+const Areas = ({ route }) => {
+  const [ user, setUser ] = useState(route.params)
+  const [ area, setArea ] = useState('')
+  const [ experience, setExperience ] = useState('')
+  const [ skills, setSkills ] = useState('')
+
+  function VerifyData(){
+    if(area === '' || experience === '' || skills === ''){
+      Alert.alert(
+        'Ops! Falha ao receber seus dados',
+        'Algum campo não foi preenchido'
+      )
+    }else{
+      navigation.navigate('TagsRegister', {
+        name: user.name,
+        email: user.email,
+        portfolio: user.portfolio,
+        password: user.password,
+        area: area,
+        experience: experience,
+        skills: skills
+      })
+    }
+  }
+
   const navigation = useNavigation()
   return (
     <Container>
@@ -84,7 +102,11 @@ const Areas = () => {
             data={data}
             horizontal={true}
             renderItem={({ item }) => (
-              <Card style={style.shadow}>
+              <Card 
+                style={style.shadow}
+                onPress={() => setArea(item.name)}
+                Selected={area === item.name ? true : false}
+              >
                 <ImageCard 
                   source={character}
                 />
@@ -95,15 +117,20 @@ const Areas = () => {
           />
           <FormTitle>Quanto tempo de experiência?*</FormTitle>
           <Input 
-            maxLength={25}
+            keyboardType='number-pad'
+            maxLength={10}
+            value={experience}
+            onChangeText={e => setExperience(e)}
           />
 
           <FormTitle>Suas Habilidades?*</FormTitle>
           <Input 
-            maxLength={25}
+            autoCapitalize='words'
+            value={skills}
+            onChangeText={e => setSkills(e)}
           />
           <ButtonRegister
-              onPress={() => navigation.navigate('TagsRegister')}
+              onPress={() => VerifyData()}
             >
               <ButtonText>Próxima etapa</ButtonText>
           </ButtonRegister>
