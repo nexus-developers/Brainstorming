@@ -18,7 +18,8 @@ export const ScreenTitle = styled.Text`
   margin-left: 5px;
 `;
 
-export const User = styled.TouchableOpacity``
+export const User = styled.TouchableOpacity`
+`
 export const UserPhoto = styled.Image`
   height: 40px;
   width: 40px;
